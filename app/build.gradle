@@ -36,8 +36,6 @@ dependencies {
     compile supportDependencies.constraintlayout
 
     compile squareDependencies.retrofit
-    compile googleDependencies.gson
-
     compile squareDependencies.retrofitrxadapter
     compile squareDependencies.retrofitgsonconverter
 
@@ -50,6 +48,7 @@ dependencies {
     compile squareDependencies.logginginterceptor
     compile squareDependencies.okhttp
 
+    compile googleDependencies.gson
     compile googleDependencies.dagger
     compile googleDependencies.daggerandroid
     compile googleDependencies.daggerandroidsupport

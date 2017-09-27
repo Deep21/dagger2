@@ -7,3 +7,9 @@
 /build
 /captures
 .externalNativeBuild
+.idea/
+libs/
+src/main/java/com/example/samfisher/dagger2/data/local/
+src/main/java/com/example/samfisher/dagger2/data/remote/
+src/main/res/drawable/
+src/main/res/layout/list_layout.xml

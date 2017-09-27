@@ -1,5 +1,6 @@
 package com.example.samfisher.dagger2.presenter;
 
+import com.example.samfisher.dagger2.views.ContactView;
 import com.example.samfisher.dagger2.views.View;
 
 /**
@@ -8,6 +9,8 @@ import com.example.samfisher.dagger2.views.View;
 
 public interface BasePresenter {
 
-    void onBindView(View view);
+    void onBindView(ContactView view);
     void onDestroyView();
+    void onDestroy();
+    void onStop();
 }

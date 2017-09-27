@@ -3,19 +3,31 @@ package com.example.samfisher.dagger2.views.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.example.samfisher.dagger2.Contact;
 import com.example.samfisher.dagger2.R;
-import com.example.samfisher.dagger2.presenter.ContactPresenter;
+import com.example.samfisher.dagger2.adapters.ContactListAdapter;
+import com.example.samfisher.dagger2.presenter.ContactListPresenter;
 import com.example.samfisher.dagger2.views.ContactView;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
 import timber.log.Timber;
 
@@ -27,26 +39,31 @@ import timber.log.Timber;
  * Use the {@link ContactListFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContactListFragment extends Fragment implements HasSupportFragmentInjector,ContactView{
+public class ContactListFragment extends Fragment implements HasSupportFragmentInjector, ContactView {
     @Inject
-    DispatchingAndroidInjector<Fragment> androidInjector ;
+    DispatchingAndroidInjector<Fragment> androidInjector;
 
     @Inject
-    ContactPresenter contactPresenter;
+    Context context;
+
+    @Inject
+    ContactListAdapter contactListAdapter;
+
+    @BindView(R.id.contact_recycler_view)
+    RecyclerView recyclerView;
+
+    private RecyclerView.LayoutManager mLayoutManager;
+    @Inject
+    ContactListPresenter contactListPresenter;
 
     private OnFragmentInteractionListener mListener;
+    private Unbinder unbinder;
 
     public ContactListFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ContactListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static ContactListFragment newInstance() {
         ContactListFragment fragment = new ContactListFragment();
         return fragment;
@@ -54,21 +71,53 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AndroidSupportInjection.inject(this);
         super.onCreate(savedInstanceState);
-        Timber.d("%s", contactPresenter);
-        if (getArguments() != null) {
+    }
 
-        }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        contactListPresenter.getListContact();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        contactListPresenter.onBindView(this);
+        recyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(context);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setAdapter(contactListAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        contactListPresenter.onDestroy();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        contactListPresenter.onStop();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_list, container, false);
+        View v = inflater.inflate(R.layout.list_layout, container, false);
+        unbinder = ButterKnife.bind(this, v);
+        return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -105,6 +154,15 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
     @Override
     public void showSuccessful() {
 
+    }
+
+    @Override
+    public void onSuccess(List<Contact> contacts) {
+
+        contactListAdapter.setContactList(contacts);
+        contactListAdapter.notifyDataSetChanged();
+        Timber.d("%s", contacts);
+        Toast.makeText(context, "" + contacts, Toast.LENGTH_SHORT).show();
     }
 
 

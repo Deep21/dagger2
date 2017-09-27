@@ -13,4 +13,10 @@ public interface InvoiceApi {
 
     @GET("contacts")
     Observable<List<Contact>> getListContacts();
+
+    @GET("contact")
+    Observable<Contact> getContact();
+
+    @GET("address")
+    Observable<List<Address>> getListAddress();
 }
