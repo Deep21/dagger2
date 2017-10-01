@@ -8,6 +8,7 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class Contact {
+
     @SerializedName("company")
     @Expose
     private String company;

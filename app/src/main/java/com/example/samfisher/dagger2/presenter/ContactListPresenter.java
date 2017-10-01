@@ -30,7 +30,7 @@ public class ContactListPresenter implements BasePresenter {
     @Override
     public void onBindView(ContactView view) {
         this.view = view;
-        Timber.d("%s", view);
+
     }
 
     @Override
@@ -69,6 +69,6 @@ public class ContactListPresenter implements BasePresenter {
     }
 
     public void onClick(Contact contact) {
-        Timber.d("%s", contact);
+
     }
 }

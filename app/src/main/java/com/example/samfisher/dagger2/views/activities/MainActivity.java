@@ -1,5 +1,6 @@
-package com.example.samfisher.dagger2.views;
+package com.example.samfisher.dagger2.views.activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,7 +16,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends AppCompatActivity implements ContactListFragment.OnFragmentInteractionListener, HasSupportFragmentInjector {
+public class MainActivity extends AppCompatActivity implements HasSupportFragmentInjector {
     @Inject
     DispatchingAndroidInjector<Fragment> androidInjector;
 
@@ -24,11 +25,7 @@ public class MainActivity extends AppCompatActivity implements ContactListFragme
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
+        startActivity(new Intent(this, ContactActivity.class));
     }
 
     @Override

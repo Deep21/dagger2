@@ -30,6 +30,6 @@ public class ContactDataSource implements DataSource<Contact> {
 
     @Override
     public Observable<Contact> getDetail(int id) {
-        return null;
+        return invoiceApi.getContact(id);
     }
 }

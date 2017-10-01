@@ -31,7 +31,6 @@ public class ContactDetailPresenter implements BasePresenter {
     @Override
     public void onBindView(ContactView view) {
         this.view = view;
-        Timber.d("%s", view);
     }
 
     @Override
@@ -51,7 +50,6 @@ public class ContactDetailPresenter implements BasePresenter {
 
     public void getContact(int id) {
         contactInteractor.excecute(new ContactDisposable(), ContactDetailInteractor.Params.forContact(id));
-
     }
 
     private final class ContactDisposable extends DisposableObserver<Contact> {
@@ -63,12 +61,12 @@ public class ContactDetailPresenter implements BasePresenter {
 
         @Override
         public void onError(@NonNull Throwable e) {
-
+            Timber.d("%s", e);
         }
 
         @Override
         public void onComplete() {
-
+            Timber.d("%s", "onComplete");
         }
     }
 
