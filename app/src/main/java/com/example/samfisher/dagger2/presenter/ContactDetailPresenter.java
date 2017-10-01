@@ -50,26 +50,26 @@ public class ContactDetailPresenter implements BasePresenter {
 
 
     public void getContact(int id) {
-        contactInteractor.excecute(new DisposableObserver<Contact, id>() {
+        contactInteractor.excecute(new ContactDisposable(), ContactDetailInteractor.Params.forContact(id));
 
-            @Override
-            public void onNext(@NonNull Contact contact) {
+    }
 
-            }
+    private final class ContactDisposable extends DisposableObserver<Contact> {
 
-            @Override
-            public void onError(@NonNull Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
+        @Override
+        public void onNext(@NonNull Contact contact) {
+            Timber.d("%s", contact);
         }
-    );
 
-}
+        @Override
+        public void onError(@NonNull Throwable e) {
 
+        }
+
+        @Override
+        public void onComplete() {
+
+        }
+    }
 
 }

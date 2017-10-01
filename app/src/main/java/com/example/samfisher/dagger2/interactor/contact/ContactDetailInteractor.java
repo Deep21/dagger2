@@ -15,7 +15,7 @@ import io.reactivex.Observable;
  * Created by Samfisher on 29/09/2017.
  */
 
-public class ContactDetailInteractor extends BaseInteractor<Contact, Void> {
+public class ContactDetailInteractor extends BaseInteractor<Contact, ContactDetailInteractor.Params> {
 
     private ContactRepository contactRepository;
 
@@ -25,9 +25,21 @@ public class ContactDetailInteractor extends BaseInteractor<Contact, Void> {
     }
 
     @Override
-    public Observable<Contact> getObservable() {
-        return contactRepository.getDetail();
+    public Observable<Contact> getObservable(Params params) {
+        return contactRepository.getDetail(params.contactId);
     }
 
+    public static final class Params {
+
+        private final int contactId;
+
+        private Params(int contactId) {
+            this.contactId = contactId;
+        }
+
+        public static Params forContact(int contactId) {
+            return new Params(contactId);
+        }
+    }
 
 }

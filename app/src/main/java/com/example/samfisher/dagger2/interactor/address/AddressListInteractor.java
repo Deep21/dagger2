@@ -2,6 +2,7 @@ package com.example.samfisher.dagger2.interactor.address;
 
 import com.example.samfisher.dagger2.Address;
 import com.example.samfisher.dagger2.data.remote.AddressDataSource;
+import com.example.samfisher.dagger2.data.remote.AddressRepository;
 import com.example.samfisher.dagger2.interactor.BaseInteractor;
 
 import java.util.List;
@@ -16,16 +17,16 @@ import io.reactivex.Observable;
 
 public class AddressListInteractor extends BaseInteractor<List<Address>, Void> {
 
-    private final AddressDataSource remoteService;
+    private final AddressRepository addressRepository;
 
     @Override
-    public Observable<List<Address>> getObservable() {
-        return remoteService.getList();
+    public Observable<List<Address>> getObservable(Void aVoid) {
+        return addressRepository.getList();
     }
 
     @Inject
-    public AddressListInteractor(AddressDataSource remoteService) {
-        this.remoteService = remoteService;
+    public AddressListInteractor(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
     }
 
 }

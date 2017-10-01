@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 public class AddressRepository implements DataSource<Address> {
 
     private AddressDataSource remoteService;
-//TODO a remplacer par le repo
+
     @Inject
     public AddressRepository(AddressDataSource remoteService) {
         this.remoteService = remoteService;
@@ -29,7 +29,7 @@ public class AddressRepository implements DataSource<Address> {
     }
 
     @Override
-    public Observable<Address> getDetail() {
+    public Observable<Address> getDetail(int id) {
         return null;
     }
 }

@@ -64,7 +64,7 @@ public class ContactListPresenter implements BasePresenter {
             public void onComplete() {
 
             }
-        });
+        }, null);
 
     }
 

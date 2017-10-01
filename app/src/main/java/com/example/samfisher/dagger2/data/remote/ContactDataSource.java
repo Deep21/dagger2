@@ -29,7 +29,7 @@ public class ContactDataSource implements DataSource<Contact> {
     }
 
     @Override
-    public Observable<Contact> getDetail() {
+    public Observable<Contact> getDetail(int id) {
         return null;
     }
 }

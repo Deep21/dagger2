@@ -27,7 +27,7 @@ public class ContactListInteractor extends BaseInteractor<List<Contact>, Void> {
 
 
     @Override
-    public Observable<List<Contact>> getObservable() {
+    public Observable<List<Contact>> getObservable(Void aVoid) {
         return contactRepository.getList();
     }
 

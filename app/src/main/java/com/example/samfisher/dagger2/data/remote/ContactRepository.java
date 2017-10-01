@@ -28,7 +28,7 @@ public class ContactRepository implements DataSource<Contact> {
     }
 
     @Override
-    public Observable<Contact> getDetail() {
-        return remoteService.getDetail();
+    public Observable<Contact> getDetail(int id) {
+        return remoteService.getDetail(id);
     }
 }

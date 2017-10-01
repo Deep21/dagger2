@@ -29,7 +29,7 @@ public class AddressDataSource implements DataSource<Address> {
     }
 
     @Override
-    public Observable<Address> getDetail() {
+    public Observable<Address> getDetail(int id) {
         return null;
     }
 }

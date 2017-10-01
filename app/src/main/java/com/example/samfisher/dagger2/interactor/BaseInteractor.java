@@ -18,10 +18,10 @@ public abstract class BaseInteractor<T, Params> {
         this.compositeDisposable = new CompositeDisposable();
     }
 
-    public abstract Observable<T> getObservable();
+    public abstract Observable<T> getObservable(Params params);
 
-    public void excecute(DisposableObserver<T> tDisposableObserver) {
-        Disposable disposable = getObservable()
+    public void excecute(DisposableObserver<T> tDisposableObserver, Params params) {
+        Disposable disposable = getObservable(params)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(tDisposableObserver);
