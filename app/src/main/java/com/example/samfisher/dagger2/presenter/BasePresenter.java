@@ -7,9 +7,9 @@ import com.example.samfisher.dagger2.views.View;
  * Created by Samfisher on 22/09/2017.
  */
 
-public interface BasePresenter {
+public interface BasePresenter<T> {
 
-    void onBindView(ContactView view);
+    void onBindView(T view);
     void onDestroyView();
     void onDestroy();
     void onStop();

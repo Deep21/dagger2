@@ -40,6 +40,8 @@ import timber.log.Timber;
  * create an instance of this fragment.
  */
 public class ContactListFragment extends Fragment implements HasSupportFragmentInjector, ContactView {
+    public final static String TAG = "ContactListFragment";
+
     @Inject
     DispatchingAndroidInjector<Fragment> androidInjector;
 
@@ -60,13 +62,10 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
     private Unbinder unbinder;
 
     public ContactListFragment() {
-        // Required empty public constructor
     }
 
-
     public static ContactListFragment newInstance() {
-        ContactListFragment fragment = new ContactListFragment();
-        return fragment;
+        return new ContactListFragment();
     }
 
     @Override
@@ -86,14 +85,13 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
         super.onViewCreated(view, savedInstanceState);
         contactListPresenter.onBindView(this);
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(contactListAdapter);
         contactListAdapter.setOnItemClickListener(new ContactListAdapter.OnItemClickListener() {
             @Override
-            public void onUserItemClicked(Contact contact) {
-               contactListPresenter.onClick(contact);
+            public void onUserItemClicked(int position) {
+                mListener.onFragmentInteraction(position);
             }
         });
     }
@@ -124,9 +122,9 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
         return v;
     }
 
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed(int position) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onFragmentInteraction(position);
         }
     }
 
@@ -166,23 +164,10 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
     public void onSuccess(List<Contact> contacts) {
         contactListAdapter.setContactList(contacts);
         contactListAdapter.notifyDataSetChanged();
-        Timber.d("%s", contacts);
-        Toast.makeText(context, "" + contacts, Toast.LENGTH_SHORT).show();
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int position);
     }
 }

@@ -15,20 +15,20 @@ import io.reactivex.Observable;
 
 public class ContactRepository implements DataSource<Contact> {
 
-    private ContactDataSource remoteService;
+    private ContactDataSource contactDataSource;
 
     @Inject
     public ContactRepository(ContactDataSource remoteService) {
-        this.remoteService = remoteService;
+        this.contactDataSource = remoteService;
     }
 
     @Override
     public Observable<List<Contact>> getList() {
-        return remoteService.getList();
+        return contactDataSource.getList();
     }
 
     @Override
     public Observable<Contact> getDetail(int id) {
-        return remoteService.getDetail(id);
+        return contactDataSource.getDetail(id);
     }
 }

@@ -33,7 +33,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     }
 
     public interface OnItemClickListener {
-        void onUserItemClicked(Contact contact);
+        void onUserItemClicked(int position);
     }
 
     @Inject
@@ -54,7 +54,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickListener.onUserItemClicked(contactList.get(pos));
+                onItemClickListener.onUserItemClicked(pos);
             }
         });
 

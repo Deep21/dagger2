@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 /**
  * Created by Samfisher on 29/09/2017.
@@ -30,8 +31,7 @@ public class ContactDetailInteractor extends BaseInteractor<Contact, ContactDeta
     }
 
     public static final class Params {
-
-        private final int contactId;
+        int contactId;
 
         private Params(int contactId) {
             this.contactId = contactId;

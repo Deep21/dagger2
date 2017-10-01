@@ -3,7 +3,9 @@ package com.example.samfisher.dagger2.presenter;
 import com.example.samfisher.dagger2.Contact;
 import com.example.samfisher.dagger2.interactor.contact.ContactDetailInteractor;
 import com.example.samfisher.dagger2.interactor.contact.ContactListInteractor;
+import com.example.samfisher.dagger2.views.ContactDetailView;
 import com.example.samfisher.dagger2.views.ContactView;
+import com.example.samfisher.dagger2.views.View;
 
 import java.util.List;
 
@@ -17,10 +19,10 @@ import timber.log.Timber;
  * Created by Samfisher on 22/09/2017.
  */
 
-public class ContactDetailPresenter implements BasePresenter {
+public class ContactDetailPresenter implements BasePresenter<ContactDetailView> {
 
     private ContactDetailInteractor contactInteractor;
-    private ContactView view;
+    private ContactDetailView view;
 
     @Inject
     public ContactDetailPresenter(ContactDetailInteractor contactInteractor) {
@@ -29,9 +31,8 @@ public class ContactDetailPresenter implements BasePresenter {
     }
 
     @Override
-    public void onBindView(ContactView view) {
+    public void onBindView(ContactDetailView view) {
         this.view = view;
-        Timber.d("%s", view);
     }
 
     @Override
@@ -51,24 +52,23 @@ public class ContactDetailPresenter implements BasePresenter {
 
     public void getContact(int id) {
         contactInteractor.excecute(new ContactDisposable(), ContactDetailInteractor.Params.forContact(id));
-
     }
 
     private final class ContactDisposable extends DisposableObserver<Contact> {
 
         @Override
         public void onNext(@NonNull Contact contact) {
-            Timber.d("%s", contact);
+            view.onSuccess(contact);
         }
 
         @Override
         public void onError(@NonNull Throwable e) {
-
+            Timber.d("%s", e);
         }
 
         @Override
         public void onComplete() {
-
+            Timber.d("%s", "onComplete");
         }
     }
 

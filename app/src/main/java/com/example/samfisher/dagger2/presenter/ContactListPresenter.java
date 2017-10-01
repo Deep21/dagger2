@@ -16,7 +16,7 @@ import timber.log.Timber;
  * Created by Samfisher on 22/09/2017.
  */
 
-public class ContactListPresenter implements BasePresenter {
+public class ContactListPresenter implements BasePresenter<ContactView> {
 
     private ContactListInteractor contactInteractor;
     private ContactView view;
@@ -30,7 +30,7 @@ public class ContactListPresenter implements BasePresenter {
     @Override
     public void onBindView(ContactView view) {
         this.view = view;
-        Timber.d("%s", view);
+
     }
 
     @Override
@@ -69,6 +69,6 @@ public class ContactListPresenter implements BasePresenter {
     }
 
     public void onClick(Contact contact) {
-        Timber.d("%s", contact);
+
     }
 }
