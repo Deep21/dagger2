@@ -90,6 +90,12 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
         mLayoutManager = new LinearLayoutManager(context);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(contactListAdapter);
+        contactListAdapter.setOnItemClickListener(new ContactListAdapter.OnItemClickListener() {
+            @Override
+            public void onUserItemClicked(Contact contact) {
+               contactListPresenter.onClick(contact);
+            }
+        });
     }
 
     @Override
@@ -158,7 +164,6 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
 
     @Override
     public void onSuccess(List<Contact> contacts) {
-
         contactListAdapter.setContactList(contacts);
         contactListAdapter.notifyDataSetChanged();
         Timber.d("%s", contacts);

@@ -68,5 +68,7 @@ public class ContactListPresenter implements BasePresenter {
 
     }
 
-
+    public void onClick(Contact contact) {
+        Timber.d("%s", contact);
+    }
 }

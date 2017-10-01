@@ -26,11 +26,19 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     private List<Contact> contactList;
     private Context context;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener {
+        void onUserItemClicked(Contact contact);
+    }
 
     @Inject
     ContactListAdapter(Context context) {
         this.context = context;
-        Timber.d("Context in the list adapter %s", context);
     }
 
     @Override
@@ -41,7 +49,15 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        final int pos = position;
         holder.name.setText(contactList.get(position).getEmail());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onUserItemClicked(contactList.get(pos));
+            }
+        });
+
     }
 
     @Override
@@ -57,12 +73,12 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         TextView name;
+        View itemView;
 
         ViewHolder(View itemView) {
             super(itemView);
+            this.itemView = itemView;
             ButterKnife.bind(this, itemView);
         }
-
-
     }
 }
