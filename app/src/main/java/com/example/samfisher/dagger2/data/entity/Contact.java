@@ -1,4 +1,4 @@
-package com.example.samfisher.dagger2;
+package com.example.samfisher.dagger2.data.entity;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

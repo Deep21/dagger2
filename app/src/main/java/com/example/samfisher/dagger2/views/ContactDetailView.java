@@ -1,8 +1,6 @@
 package com.example.samfisher.dagger2.views;
 
-import com.example.samfisher.dagger2.Contact;
-
-import java.util.List;
+import com.example.samfisher.dagger2.data.entity.Contact;
 
 /**
  * Created by deept on 02/10/2017.

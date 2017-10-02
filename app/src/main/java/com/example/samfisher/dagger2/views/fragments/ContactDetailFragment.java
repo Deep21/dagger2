@@ -1,6 +1,7 @@
 package com.example.samfisher.dagger2.views.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,16 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.samfisher.dagger2.Contact;
+import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.R;
 import com.example.samfisher.dagger2.presenter.ContactDetailPresenter;
 import com.example.samfisher.dagger2.views.ContactDetailView;
-
-import java.util.List;
+import com.example.samfisher.dagger2.views.activities.AddressActivity;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
@@ -34,8 +35,11 @@ import dagger.android.support.HasSupportFragmentInjector;
  * Use the {@link ContactDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContactDetailFragment extends Fragment  implements HasSupportFragmentInjector, ContactDetailView {
+
+public class ContactDetailFragment extends Fragment implements HasSupportFragmentInjector, ContactDetailView {
+
     public static final String TAG = "ContactDetailFragment";
+
     @Inject
     DispatchingAndroidInjector<Fragment> androidInjector;
 
@@ -43,8 +47,6 @@ public class ContactDetailFragment extends Fragment  implements HasSupportFragme
     ContactDetailPresenter contactDetailPresenter;
 
     private static final String POSITION = "position";
-    private int position;
-
     private OnFragmentInteractionListener mListener;
     private Unbinder unbinder;
 
@@ -75,8 +77,7 @@ public class ContactDetailFragment extends Fragment  implements HasSupportFragme
         AndroidSupportInjection.inject(this);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            position = getArguments().getInt(POSITION);
-            contactDetailPresenter.getContact(position);
+            contactDetailPresenter.getContact(getArguments().getInt(POSITION));
         }
     }
 
@@ -87,7 +88,6 @@ public class ContactDetailFragment extends Fragment  implements HasSupportFragme
         unbinder = ButterKnife.bind(this, v);
         return v;
     }
-
 
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -133,7 +133,6 @@ public class ContactDetailFragment extends Fragment  implements HasSupportFragme
 
     }
 
-    @Override
     public void onSuccess(Contact contact) {
         Toast.makeText(getContext(), contact.getCompany(), Toast.LENGTH_SHORT).show();
     }
@@ -141,5 +140,10 @@ public class ContactDetailFragment extends Fragment  implements HasSupportFragme
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @OnClick(R.id.next)
+    public void onNext() {
+        getActivity().startActivity(new Intent(getContext(), AddressActivity.class));
     }
 }

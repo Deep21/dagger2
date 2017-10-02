@@ -1,8 +1,7 @@
 package com.example.samfisher.dagger2.interactor.address;
 
-import com.example.samfisher.dagger2.Address;
-import com.example.samfisher.dagger2.data.remote.AddressDataSource;
-import com.example.samfisher.dagger2.data.remote.AddressRepository;
+import com.example.samfisher.dagger2.data.entity.Address;
+import com.example.samfisher.dagger2.data.repository.AddressRepository;
 import com.example.samfisher.dagger2.interactor.BaseInteractor;
 
 import java.util.List;

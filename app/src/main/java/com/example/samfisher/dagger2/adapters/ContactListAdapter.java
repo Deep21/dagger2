@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.samfisher.dagger2.Contact;
+import com.example.samfisher.dagger2.data.ContactModel;
+import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.R;
 
 import java.util.List;
@@ -16,7 +17,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 /**
  * Created by Samfisher on 17/09/2017.
@@ -24,7 +24,7 @@ import timber.log.Timber;
 
 public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.ViewHolder> {
 
-    private List<Contact> contactList;
+    private List<ContactModel> contactList;
     private Context context;
     private OnItemClickListener onItemClickListener;
 
@@ -50,7 +50,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final int pos = position;
-        holder.name.setText(contactList.get(position).getEmail());
+        holder.name.setText(contactList.get(position).getFirstname());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +65,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
         return contactList != null ? contactList.size() : 0;
     }
 
-    public void setContactList(List<Contact> contactList) {
+    public void setContactList(List<ContactModel> contactList) {
         this.contactList = contactList;
     }
 

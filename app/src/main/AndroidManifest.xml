@@ -22,7 +22,8 @@
         <activity
             android:name=".views.activities.ContactActivity"
             android:label="@string/title_activity_contact"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".views.activities.AddressActivity"></activity>
     </application>
 
 </manifest>

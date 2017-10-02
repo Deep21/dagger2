@@ -1,5 +1,8 @@
 package com.example.samfisher.dagger2;
 
+import com.example.samfisher.dagger2.data.entity.Address;
+import com.example.samfisher.dagger2.data.entity.Contact;
+
 import java.util.List;
 
 import io.reactivex.Observable;

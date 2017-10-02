@@ -1,7 +1,8 @@
-package com.example.samfisher.dagger2.data.remote;
+package com.example.samfisher.dagger2.data.repository;
 
-import com.example.samfisher.dagger2.Address;
+import com.example.samfisher.dagger2.data.entity.Address;
 import com.example.samfisher.dagger2.data.DataSource;
+import com.example.samfisher.dagger2.data.remote.AddressDataSource;
 
 import java.util.List;
 

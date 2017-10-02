@@ -1,13 +1,9 @@
 package com.example.samfisher.dagger2.presenter;
 
-import com.example.samfisher.dagger2.Contact;
+import com.example.samfisher.dagger2.data.ContactModel;
+import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.interactor.contact.ContactDetailInteractor;
-import com.example.samfisher.dagger2.interactor.contact.ContactListInteractor;
 import com.example.samfisher.dagger2.views.ContactDetailView;
-import com.example.samfisher.dagger2.views.ContactView;
-import com.example.samfisher.dagger2.views.View;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -54,11 +50,11 @@ public class ContactDetailPresenter implements BasePresenter<ContactDetailView> 
         contactInteractor.excecute(new ContactDisposable(), ContactDetailInteractor.Params.forContact(id));
     }
 
-    private final class ContactDisposable extends DisposableObserver<Contact> {
+    private final class ContactDisposable extends DisposableObserver<ContactModel> {
 
         @Override
-        public void onNext(@NonNull Contact contact) {
-            view.onSuccess(contact);
+        public void onNext(@NonNull ContactModel contact) {
+            //view.onSuccess(contact);
         }
 
         @Override

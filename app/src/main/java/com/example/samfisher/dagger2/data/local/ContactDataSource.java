@@ -1,4 +1,4 @@
-package com.example.samfisher.dagger2.data.remote;
+package com.example.samfisher.dagger2.data.local;
 
 import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.InvoiceApi;

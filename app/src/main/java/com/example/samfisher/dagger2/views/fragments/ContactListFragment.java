@@ -1,7 +1,6 @@
 package com.example.samfisher.dagger2.views.fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.example.samfisher.dagger2.Contact;
+import com.example.samfisher.dagger2.data.ContactModel;
+import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.R;
 import com.example.samfisher.dagger2.adapters.ContactListAdapter;
 import com.example.samfisher.dagger2.presenter.ContactListPresenter;
@@ -29,7 +28,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
-import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -161,8 +159,8 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
     }
 
     @Override
-    public void onSuccess(List<Contact> contacts) {
-        contactListAdapter.setContactList(contacts);
+    public void onSuccess(List<ContactModel> contactModels) {
+        contactListAdapter.setContactList(contactModels);
         contactListAdapter.notifyDataSetChanged();
     }
 

@@ -1,6 +1,7 @@
 package com.example.samfisher.dagger2.presenter;
 
-import com.example.samfisher.dagger2.Contact;
+import com.example.samfisher.dagger2.data.ContactModel;
+import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.interactor.contact.ContactListInteractor;
 import com.example.samfisher.dagger2.views.ContactView;
 
@@ -49,10 +50,11 @@ public class ContactListPresenter implements BasePresenter<ContactView> {
 
 
     public void getListContact() {
-        contactInteractor.excecute(new DisposableObserver<List<Contact>>() {
+        contactInteractor.excecute(new DisposableObserver<List<ContactModel>>() {
             @Override
-            public void onNext(@NonNull List<Contact> list) {
-                view.onSuccess(list);
+            public void onNext(@NonNull List<ContactModel> contactModels) {
+                Timber.d("%s", contactModels);
+                view.onSuccess(contactModels);
             }
 
             @Override

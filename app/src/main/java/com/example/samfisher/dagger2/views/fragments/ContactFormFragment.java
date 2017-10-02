@@ -11,9 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.samfisher.dagger2.Contact;
+import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.R;
-import com.example.samfisher.dagger2.adapters.ContactListAdapter;
 
 import javax.inject.Inject;
 
@@ -21,12 +20,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.AndroidSupportInjection;
 import dagger.android.support.HasSupportFragmentInjector;
-import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.

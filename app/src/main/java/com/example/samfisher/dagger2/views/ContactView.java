@@ -1,6 +1,7 @@
 package com.example.samfisher.dagger2.views;
 
-import com.example.samfisher.dagger2.Contact;
+import com.example.samfisher.dagger2.data.ContactModel;
+import com.example.samfisher.dagger2.data.entity.Contact;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface ContactView extends View {
 
     void showError();
     void showSuccessful();
-    void onSuccess(List<Contact> list);
+    void onSuccess(List<ContactModel> contactModels);
 }
