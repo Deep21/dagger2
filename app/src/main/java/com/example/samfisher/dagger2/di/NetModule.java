@@ -2,6 +2,7 @@ package com.example.samfisher.dagger2.di;
 
 import com.example.samfisher.dagger2.App;
 import com.example.samfisher.dagger2.InvoiceApi;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -45,12 +46,14 @@ public class NetModule {
         OkHttpClient.Builder client = new OkHttpClient.Builder();
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        client.addInterceptor(logging)
-        .cache(cache);
-        return client.build();
+        return client.addNetworkInterceptor(new StethoInterceptor())
+                .addInterceptor(logging)
+                .cache(cache)
+                .build();
     }
 
     @Singleton
+
     @Provides
     Retrofit provideRetrofit(Gson gson, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()

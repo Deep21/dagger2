@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -88,7 +89,8 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
         contactListAdapter.setOnItemClickListener(new ContactListAdapter.OnItemClickListener() {
             @Override
             public void onUserItemClicked(int position) {
-                mListener.onFragmentInteraction(position);
+                int contectId = contactListAdapter.getContactList().get(position).getId();
+                mListener.onFragmentInteraction(contectId);
             }
         });
     }
@@ -164,7 +166,6 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(int position);
     }
 }

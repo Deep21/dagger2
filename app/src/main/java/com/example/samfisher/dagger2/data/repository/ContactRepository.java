@@ -1,5 +1,6 @@
 package com.example.samfisher.dagger2.data.repository;
 
+import com.example.samfisher.dagger2.data.mapper.UserDataMapper;
 import com.example.samfisher.dagger2.presenter.model.ContactModel;
 import com.example.samfisher.dagger2.data.entity.Address;
 import com.example.samfisher.dagger2.data.entity.Contact;
@@ -22,29 +23,25 @@ import timber.log.Timber;
 public class ContactRepository implements IContactRepository {
 
     private ContactDataSource contactDataSource;
+    private UserDataMapper userDataMapper;
 
     @Inject
-    public ContactRepository(ContactDataSource contactDataSource) {
+    public ContactRepository(ContactDataSource contactDataSource, UserDataMapper userDataMapper) {
         this.contactDataSource = contactDataSource;
+        this.userDataMapper = userDataMapper;
     }
 
     @Override
     public Observable<List<ContactModel>> getList() {
-        return contactDataSource.getList().flatMap(new Function<List<Contact>, ObservableSource<List<Address>>>() {
-            @Override
-            public ObservableSource<List<Address>> apply(@NonNull List<Contact> contacts) throws Exception {
-                Timber.d("%s", contacts);
-                return contactDataSource.getAddress();
-            }
-        }).map(new Function<List<Address>, List<ContactModel>>() {
-            @Override
-            public List<ContactModel> apply(@NonNull List<Address> addresses) throws Exception {
-                Timber.d("%s", addresses);
-                return null;
-            }
-        })
+        return contactDataSource
+                .getList()
+                .map(new Function<List<Contact>, List<ContactModel>>() {
+                    @Override
+                    public List<ContactModel> apply(@NonNull List<Contact> contacts) throws Exception {
+                        return userDataMapper.mapCollection(contacts);
+                    }
+                });
 
-                ;
     }
 
     @Override

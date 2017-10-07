@@ -49,7 +49,9 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         final int pos = position;
+
         holder.name.setText(contactList.get(position).getFirstname());
+        holder.company.setText(contactList.get(position).getCompany());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,9 +71,18 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
     }
 
 
+    public List<ContactModel> getContactList() {
+        return contactList;
+    }
+
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.name)
         TextView name;
+
+        @BindView(R.id.company)
+        TextView company;
+
         View itemView;
 
         ViewHolder(View itemView) {

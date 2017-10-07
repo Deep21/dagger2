@@ -23,7 +23,6 @@ public class AddressRepository implements DataSource<Address> {
         this.remoteService = remoteService;
     }
 
-
     @Override
     public Observable<List<Address>> getList() {
         return remoteService.getList();

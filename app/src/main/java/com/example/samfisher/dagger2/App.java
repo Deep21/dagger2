@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.example.samfisher.dagger2.di.DaggerAppComponent;
+import com.facebook.stetho.Stetho;
 
 import javax.inject.Inject;
 
@@ -28,8 +29,10 @@ public class App extends Application implements HasActivityInjector {
                 .build()
                 .inject(this);
 
-        if (BuildConfig.DEBUG)
+        if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
+            Stetho.initializeWithDefaults(this);
+        }
 
         super.onCreate();
     }

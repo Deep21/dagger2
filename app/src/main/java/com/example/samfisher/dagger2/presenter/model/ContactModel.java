@@ -20,6 +20,8 @@ public class ContactModel {
 
     private String birthday;
 
+    private int id;
+
     public ContactModel() {
         super();
     }
@@ -70,5 +72,13 @@ public class ContactModel {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

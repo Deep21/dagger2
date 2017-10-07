@@ -9,18 +9,26 @@ import com.google.gson.annotations.SerializedName;
 
 public class Contact {
 
+    @SerializedName("id")
+    @Expose
+    private int id;
+
     @SerializedName("company")
     @Expose
     private String company;
+
     @SerializedName("firstname")
     @Expose
     private String firstname;
+
     @SerializedName("lastname")
     @Expose
     private String lastname;
+
     @SerializedName("email")
     @Expose
     private String email;
+
     @SerializedName("birthday")
     @Expose
     private String birthday;
@@ -67,5 +75,13 @@ public class Contact {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
