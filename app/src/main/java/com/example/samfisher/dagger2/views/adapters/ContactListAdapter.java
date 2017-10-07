@@ -1,4 +1,4 @@
-package com.example.samfisher.dagger2.adapters;
+package com.example.samfisher.dagger2.views.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.samfisher.dagger2.data.ContactModel;
-import com.example.samfisher.dagger2.data.entity.Contact;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 import com.example.samfisher.dagger2.R;
 
 import java.util.List;

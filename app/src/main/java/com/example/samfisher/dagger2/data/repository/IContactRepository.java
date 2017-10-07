@@ -1,6 +1,6 @@
 package com.example.samfisher.dagger2.data.repository;
 
-import com.example.samfisher.dagger2.data.ContactModel;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 
 import java.util.List;
 

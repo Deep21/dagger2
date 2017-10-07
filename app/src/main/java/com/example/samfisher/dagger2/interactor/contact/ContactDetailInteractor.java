@@ -1,7 +1,6 @@
 package com.example.samfisher.dagger2.interactor.contact;
 
-import com.example.samfisher.dagger2.data.ContactModel;
-import com.example.samfisher.dagger2.data.entity.Contact;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 import com.example.samfisher.dagger2.data.repository.ContactRepository;
 import com.example.samfisher.dagger2.interactor.BaseInteractor;
 

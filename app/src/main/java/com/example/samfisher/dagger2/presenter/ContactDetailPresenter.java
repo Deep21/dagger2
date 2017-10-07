@@ -1,8 +1,7 @@
 package com.example.samfisher.dagger2.presenter;
 
-import com.example.samfisher.dagger2.data.ContactModel;
-import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.interactor.contact.ContactDetailInteractor;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 import com.example.samfisher.dagger2.views.ContactDetailView;
 
 import javax.inject.Inject;

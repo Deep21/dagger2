@@ -1,8 +1,8 @@
 package com.example.samfisher.dagger2.presenter;
 
-import com.example.samfisher.dagger2.data.ContactModel;
 import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.interactor.contact.ContactListInteractor;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 import com.example.samfisher.dagger2.views.ContactView;
 
 import java.util.List;
@@ -45,6 +45,7 @@ public class ContactListPresenter implements BasePresenter<ContactView> {
 
     @Override
     public void onStop() {
+        view = null;
         contactInteractor.dispose();
     }
 

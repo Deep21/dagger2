@@ -1,4 +1,4 @@
-package com.example.samfisher.dagger2.data;
+package com.example.samfisher.dagger2.presenter.model;
 
 import com.example.samfisher.dagger2.data.entity.Address;
 
