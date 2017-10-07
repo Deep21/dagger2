@@ -1,5 +1,6 @@
 package com.example.samfisher.dagger2.data.remote;
 
+import com.example.samfisher.dagger2.data.entity.Address;
 import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.InvoiceApi;
 import com.example.samfisher.dagger2.data.DataSource;
@@ -31,5 +32,10 @@ public class ContactDataSource implements DataSource<Contact> {
     @Override
     public Observable<Contact> getDetail(int id) {
         return invoiceApi.getContact(id);
+    }
+
+
+    public Observable<List<Address>> getAddress() {
+        return invoiceApi.getListAddress();
     }
 }

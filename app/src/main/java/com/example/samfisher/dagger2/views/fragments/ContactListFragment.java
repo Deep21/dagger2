@@ -11,9 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.samfisher.dagger2.data.ContactModel;
-import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.R;
-import com.example.samfisher.dagger2.adapters.ContactListAdapter;
+import com.example.samfisher.dagger2.views.adapters.ContactListAdapter;
 import com.example.samfisher.dagger2.presenter.ContactListPresenter;
 import com.example.samfisher.dagger2.views.ContactView;
 

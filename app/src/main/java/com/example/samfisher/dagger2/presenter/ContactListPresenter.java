@@ -45,6 +45,7 @@ public class ContactListPresenter implements BasePresenter<ContactView> {
 
     @Override
     public void onStop() {
+        view = null;
         contactInteractor.dispose();
     }
 
