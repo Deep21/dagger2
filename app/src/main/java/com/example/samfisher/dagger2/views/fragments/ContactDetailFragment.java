@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.R;
 import com.example.samfisher.dagger2.presenter.ContactDetailPresenter;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 import com.example.samfisher.dagger2.views.ContactDetailView;
 import com.example.samfisher.dagger2.views.activities.AddressActivity;
 
@@ -133,12 +134,11 @@ public class ContactDetailFragment extends Fragment implements HasSupportFragmen
 
     }
 
-    public void onSuccess(Contact contact) {
+    public void onSuccess(ContactModel contact) {
         Toast.makeText(getContext(), contact.getCompany(), Toast.LENGTH_SHORT).show();
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 

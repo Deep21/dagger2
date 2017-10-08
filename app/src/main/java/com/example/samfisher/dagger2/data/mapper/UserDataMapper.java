@@ -21,7 +21,14 @@ public class UserDataMapper implements EntityMapper<Contact, ContactModel> {
 
     @Override
     public ContactModel map(Contact contact) {
-        return null;
+        ContactModel contactModel = new ContactModel();
+        contactModel.setId(contact.getId());
+        contactModel.setFirstname(contact.getFirstname());
+        contactModel.setLastname(contact.getLastname());
+        contactModel.setEmail(contact.getEmail());
+        contactModel.setCompany(contact.getCompany());
+        contactModel.setBirthday(contact.getBirthday());
+        return contactModel;
     }
 
     @Override

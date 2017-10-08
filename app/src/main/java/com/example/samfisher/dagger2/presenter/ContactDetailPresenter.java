@@ -46,14 +46,17 @@ public class ContactDetailPresenter implements BasePresenter<ContactDetailView> 
 
 
     public void getContact(int id) {
-        contactInteractor.excecute(new ContactDisposable(), ContactDetailInteractor.Params.forContact(id));
+        contactInteractor.excecute(
+                new ContactDisposable(),
+                ContactDetailInteractor.Params.forContact(id)
+        );
     }
 
     private final class ContactDisposable extends DisposableObserver<ContactModel> {
 
         @Override
         public void onNext(@NonNull ContactModel contact) {
-            //view.onSuccess(contact);
+            view.onSuccess(contact);
         }
 
         @Override

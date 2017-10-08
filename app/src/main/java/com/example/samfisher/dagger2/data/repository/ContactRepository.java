@@ -46,10 +46,12 @@ public class ContactRepository implements IContactRepository {
 
     @Override
     public Observable<ContactModel> getDetail(int id) {
-        return contactDataSource.getDetail(id).map(new Function<Contact, ContactModel>() {
+        return contactDataSource
+                .getDetail(id)
+                .map(new Function<Contact, ContactModel>() {
             @Override
             public ContactModel apply(@NonNull Contact contact) throws Exception {
-                return null;
+                return userDataMapper.map(contact);
             }
         });
     }

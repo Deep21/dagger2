@@ -1,6 +1,6 @@
 package com.example.samfisher.dagger2.views;
 
-import com.example.samfisher.dagger2.data.entity.Contact;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 
 /**
  * Created by deept on 02/10/2017.
@@ -12,5 +12,5 @@ public interface ContactDetailView extends View {
 
     void showSuccessful();
 
-    void onSuccess(Contact contact);
+    void onSuccess(ContactModel contact);
 }
