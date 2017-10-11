@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import timber.log.Timber;
 
 /**
@@ -33,7 +35,12 @@ public class App extends Application implements HasActivityInjector {
             Timber.plant(new Timber.DebugTree());
             Stetho.initializeWithDefaults(this);
         }
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder()
+                .name("myrealm.realm")
+                .build();
 
+        Realm.setDefaultConfiguration(config);
         super.onCreate();
     }
 

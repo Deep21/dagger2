@@ -32,7 +32,7 @@ public class ContactDetailPresenter implements BasePresenter<ContactDetailView> 
 
     @Override
     public void onDestroyView() {
-        this.view = null;
+        view = null;
     }
 
     @Override
@@ -42,6 +42,7 @@ public class ContactDetailPresenter implements BasePresenter<ContactDetailView> 
     @Override
     public void onStop() {
         contactInteractor.dispose();
+        view = null;
     }
 
 
@@ -51,6 +52,13 @@ public class ContactDetailPresenter implements BasePresenter<ContactDetailView> 
                 ContactDetailInteractor.Params.forContact(id)
         );
     }
+
+    public void post() {
+        contactInteractor.excecute(
+                new ContactDisposable(), null
+        );
+    }
+
 
     private final class ContactDisposable extends DisposableObserver<ContactModel> {
 

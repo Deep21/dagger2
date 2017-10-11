@@ -60,7 +60,7 @@ public class ContactListPresenter implements BasePresenter<ContactView> {
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                Timber.d("%s", e.getMessage());
             }
 
             @Override

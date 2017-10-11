@@ -13,4 +13,5 @@ public interface DataSource<T> {
     Observable<List<T>> getList();
 
     Observable<T> getDetail(int id);
+
 }

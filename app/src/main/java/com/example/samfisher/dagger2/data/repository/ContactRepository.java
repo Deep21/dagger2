@@ -1,10 +1,12 @@
 package com.example.samfisher.dagger2.data.repository;
 
-import com.example.samfisher.dagger2.data.mapper.UserDataMapper;
-import com.example.samfisher.dagger2.presenter.model.ContactModel;
-import com.example.samfisher.dagger2.data.entity.Address;
 import com.example.samfisher.dagger2.data.entity.Contact;
+import com.example.samfisher.dagger2.data.local.LocalContactDataSource;
+import com.example.samfisher.dagger2.data.local.entity.ContactRealmObject;
+import com.example.samfisher.dagger2.data.mapper.LocalContactDataMapper;
+import com.example.samfisher.dagger2.data.mapper.UserDataMapper;
 import com.example.samfisher.dagger2.data.remote.ContactDataSource;
+import com.example.samfisher.dagger2.presenter.model.ContactModel;
 
 import java.util.List;
 
@@ -13,7 +15,9 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.realm.RealmResults;
 import timber.log.Timber;
 
 /**
@@ -23,25 +27,29 @@ import timber.log.Timber;
 public class ContactRepository implements IContactRepository {
 
     private ContactDataSource contactDataSource;
+    private LocalContactDataSource localDataSource;
     private UserDataMapper userDataMapper;
+    private LocalContactDataMapper localContactDataMapper;
 
     @Inject
-    public ContactRepository(ContactDataSource contactDataSource, UserDataMapper userDataMapper) {
+    public ContactRepository(ContactDataSource contactDataSource, LocalContactDataSource localDataSource, UserDataMapper userDataMapper, LocalContactDataMapper localContactDataMapper) {
         this.contactDataSource = contactDataSource;
+        this.localDataSource = localDataSource;
         this.userDataMapper = userDataMapper;
+        this.localContactDataMapper = localContactDataMapper;
     }
 
+    //TODO créer uns ervice qui gère ca
     @Override
     public Observable<List<ContactModel>> getList() {
-        return contactDataSource
-                .getList()
-                .map(new Function<List<Contact>, List<ContactModel>>() {
+        return localDataSource.getList()
+                .map(new Function<RealmResults<ContactRealmObject>, List<ContactModel>>() {
                     @Override
-                    public List<ContactModel> apply(@NonNull List<Contact> contacts) throws Exception {
-                        return userDataMapper.mapCollection(contacts);
+                    public List<ContactModel> apply(@NonNull RealmResults<ContactRealmObject> contactRealmObjects) throws Exception {
+                        return localContactDataMapper.mapCollection(contactRealmObjects);
                     }
-                });
-
+                })
+                ;
     }
 
     @Override
@@ -49,10 +57,15 @@ public class ContactRepository implements IContactRepository {
         return contactDataSource
                 .getDetail(id)
                 .map(new Function<Contact, ContactModel>() {
-            @Override
-            public ContactModel apply(@NonNull Contact contact) throws Exception {
-                return userDataMapper.map(contact);
-            }
-        });
+                    @Override
+                    public ContactModel apply(@NonNull Contact contact) throws Exception {
+                        return userDataMapper.map(contact);
+                    }
+                });
+    }
+
+    @Override
+    public Observable<Void> post() {
+        return null;
     }
 }

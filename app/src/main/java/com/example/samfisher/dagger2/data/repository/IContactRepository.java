@@ -15,4 +15,6 @@ public interface IContactRepository {
     Observable<List<ContactModel>> getList();
 
     Observable<ContactModel> getDetail(int id);
+
+    Observable<Void> post();
 }

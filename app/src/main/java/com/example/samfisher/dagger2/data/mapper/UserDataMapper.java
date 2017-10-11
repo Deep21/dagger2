@@ -46,4 +46,6 @@ public class UserDataMapper implements EntityMapper<Contact, ContactModel> {
         }
         return contactModels;
     }
+
+
 }
