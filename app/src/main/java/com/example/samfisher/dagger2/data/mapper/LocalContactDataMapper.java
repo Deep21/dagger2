@@ -35,4 +35,11 @@ public class LocalContactDataMapper implements RealmEntityMapper<ContactRealmObj
         }
         return contactModelList;
     }
+
+    @Override
+    public ContactModel map(ContactRealmObject contactRealmObject) {
+        return null;
+    }
+
+
 }

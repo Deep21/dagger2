@@ -50,8 +50,8 @@ public class LocalContactDataSource implements ILocalRepository {
         });
     }
 
-    public Observable<List<Contact>> post() {
-        return Observable.create(new ObservableOnSubscribe<List<Contact>>() {
+    public void save(List<Contact> contacts) {
+        Observable.create(new ObservableOnSubscribe<List<Contact>>() {
             @Override
             public void subscribe(@NonNull ObservableEmitter<List<Contact>> e) throws Exception {
                 try {
@@ -59,7 +59,7 @@ public class LocalContactDataSource implements ILocalRepository {
                     realm.beginTransaction();
                     ContactRealmObject contactRealmObject = realm.createObject(ContactRealmObject.class, 1);
                     Timber.d("%s", contactRealmObject);
-                    contactRealmObject.setCompany("Nargs");
+                    contactRealmObject.setCompany("");
                     contactRealmObject.setLastName("Wickrema");
                     contactRealmObject.setFirstName("Deeptha");
                     realm.commitTransaction();

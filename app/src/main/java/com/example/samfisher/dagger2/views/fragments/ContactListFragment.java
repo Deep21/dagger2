@@ -52,10 +52,10 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
     @BindView(R.id.contact_recycler_view)
     RecyclerView recyclerView;
 
-    private RecyclerView.LayoutManager mLayoutManager;
     @Inject
     ContactListPresenter contactListPresenter;
 
+    private RecyclerView.LayoutManager mLayoutManager;
     private OnFragmentInteractionListener mListener;
     private Unbinder unbinder;
 
@@ -151,12 +151,10 @@ public class ContactListFragment extends Fragment implements HasSupportFragmentI
 
     @Override
     public void showError() {
-
     }
 
     @Override
     public void showSuccessful() {
-
     }
 
     @Override

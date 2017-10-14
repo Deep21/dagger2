@@ -25,13 +25,11 @@ public class ContactListPresenter implements BasePresenter<ContactView> {
     @Inject
     public ContactListPresenter(ContactListInteractor contactInteractor) {
         this.contactInteractor = contactInteractor;
-
     }
 
     @Override
     public void onBindView(ContactView view) {
         this.view = view;
-
     }
 
     @Override
@@ -49,12 +47,11 @@ public class ContactListPresenter implements BasePresenter<ContactView> {
         contactInteractor.dispose();
     }
 
-
     public void getListContact() {
         contactInteractor.excecute(new DisposableObserver<List<ContactModel>>() {
             @Override
             public void onNext(@NonNull List<ContactModel> contactModels) {
-                Timber.d("%s", contactModels);
+                Timber.d("%s",Thread.currentThread().getName());
                 view.onSuccess(contactModels);
             }
 

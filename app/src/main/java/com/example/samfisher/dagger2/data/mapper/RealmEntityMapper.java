@@ -12,4 +12,6 @@ import io.realm.RealmResults;
 public interface RealmEntityMapper<T extends RealmObject, V> {
 
     List<V> mapCollection(RealmResults<T> t);
+
+    V map(T t);
 }

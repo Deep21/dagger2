@@ -13,6 +13,7 @@ import android.widget.EditText;
 
 import com.example.samfisher.dagger2.data.entity.Contact;
 import com.example.samfisher.dagger2.R;
+import com.example.samfisher.dagger2.presenter.ContactPresenter;
 
 import javax.inject.Inject;
 
@@ -28,13 +29,13 @@ import dagger.android.support.HasSupportFragmentInjector;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ContactFormFragment.OnFragmentInteractionListener} interface
+ * {@link ContactFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ContactFormFragment#newInstance} factory method to
+ * Use the {@link ContactFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContactFormFragment extends Fragment implements HasSupportFragmentInjector{
-    public static final String TAG = "ContactFormFragment";
+public class ContactFragment extends Fragment implements HasSupportFragmentInjector{
+    public static final String TAG = "ContactFragment";
 
     @Inject
     DispatchingAndroidInjector<Fragment> androidInjector;
@@ -51,6 +52,9 @@ public class ContactFormFragment extends Fragment implements HasSupportFragmentI
     @Inject
     Context context;
 
+    @Inject
+    ContactPresenter contactPresenter;
+
     private OnFragmentInteractionListener mListener;
     private Unbinder unbinder;
 
@@ -58,23 +62,21 @@ public class ContactFormFragment extends Fragment implements HasSupportFragmentI
     public void postContact(Button button) {
         Contact contact = new Contact();
         contact.setEmail(editText.getText().toString());
+        contactPresenter.post();
     }
 
-    public ContactFormFragment() {
-    }
+    public ContactFragment() {}
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ContactFormFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ContactFormFragment newInstance(int position) {
-        ContactFormFragment fragment = new ContactFormFragment();
+    public static ContactFragment newInstance(int position) {
+        ContactFragment fragment = new ContactFragment();
         Bundle args = new Bundle();
         args.putInt("position", position);
         fragment.setArguments(args);
+        return fragment;
+    }
+
+    public static ContactFragment newInstance() {
+        ContactFragment fragment = new ContactFragment();
         return fragment;
     }
 
@@ -88,7 +90,6 @@ public class ContactFormFragment extends Fragment implements HasSupportFragmentI
         AndroidSupportInjection.inject(this);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -138,7 +139,6 @@ public class ContactFormFragment extends Fragment implements HasSupportFragmentI
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

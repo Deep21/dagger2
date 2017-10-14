@@ -2,17 +2,14 @@ package com.example.samfisher.dagger2.views.activities;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.example.samfisher.dagger2.R;
 import com.example.samfisher.dagger2.views.fragments.ContactDetailFragment;
-import com.example.samfisher.dagger2.views.fragments.ContactFormFragment;
+import com.example.samfisher.dagger2.views.fragments.ContactFragment;
 import com.example.samfisher.dagger2.views.fragments.ContactListFragment;
 
 import javax.inject.Inject;
@@ -21,11 +18,11 @@ import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
-import timber.log.Timber;
 
 public class ContactActivity extends AppCompatActivity implements
         ContactListFragment.OnFragmentInteractionListener,
         ContactDetailFragment.OnFragmentInteractionListener,
+        ContactFragment.OnFragmentInteractionListener,
         HasSupportFragmentInjector {
 
     @Inject
@@ -40,7 +37,8 @@ public class ContactActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.contentContainer, ContactListFragment.newInstance(), ContactListFragment.TAG)
+        //fragmentTransaction.add(R.id.contentContainer, ContactListFragment.newInstance(), ContactListFragment.TAG)
+        fragmentTransaction.add(R.id.contentContainer, ContactFragment.newInstance(), ContactFragment.TAG)
                 .addToBackStack(null)
                 .commit();
 

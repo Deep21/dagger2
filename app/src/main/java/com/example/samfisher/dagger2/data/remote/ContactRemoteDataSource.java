@@ -10,17 +10,19 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * Created by Samfisher on 26/09/2017.
  */
 
-public class ContactDataSource implements DataSource<Contact> {
+public class ContactRemoteDataSource implements DataSource<Contact> {
 
     private InvoiceApi invoiceApi;
 
     @Inject
-    public ContactDataSource(InvoiceApi invoiceApi) {
+    public ContactRemoteDataSource(InvoiceApi invoiceApi) {
         this.invoiceApi = invoiceApi;
     }
 
@@ -36,5 +38,9 @@ public class ContactDataSource implements DataSource<Contact> {
 
     public Observable<List<Address>> getAddress() {
         return invoiceApi.getListAddress();
+    }
+
+    public Observable<Response<ResponseBody>> post(Contact contact){
+        return invoiceApi.post(contact);
     }
 }

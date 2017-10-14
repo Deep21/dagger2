@@ -12,7 +12,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public abstract class BaseInteractor<T, Params> {
-    CompositeDisposable compositeDisposable;
+
+    private CompositeDisposable compositeDisposable;
 
     public BaseInteractor() {
         this.compositeDisposable = new CompositeDisposable();
@@ -26,7 +27,6 @@ public abstract class BaseInteractor<T, Params> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(tDisposableObserver);
         compositeDisposable.add(disposable);
-
     }
 
     /**

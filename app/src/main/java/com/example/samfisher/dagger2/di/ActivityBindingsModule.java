@@ -3,7 +3,7 @@ package com.example.samfisher.dagger2.di;
 import com.example.samfisher.dagger2.views.activities.ContactActivity;
 import com.example.samfisher.dagger2.views.activities.MainActivity;
 import com.example.samfisher.dagger2.views.fragments.ContactDetailFragment;
-import com.example.samfisher.dagger2.views.fragments.ContactFormFragment;
+import com.example.samfisher.dagger2.views.fragments.ContactFragment;
 import com.example.samfisher.dagger2.views.fragments.ContactListFragment;
 
 import dagger.Module;
@@ -29,5 +29,8 @@ abstract class ActivityBindingsModule {
 
     @ContributesAndroidInjector
     abstract ContactListFragment bindContactListFragment();
+
+    @ContributesAndroidInjector
+    abstract ContactFragment bindContactFragment();
 
 }
